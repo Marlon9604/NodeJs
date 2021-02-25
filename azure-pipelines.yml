@@ -26,17 +26,14 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
 
 - task: SonarQubePrepare@4
-  displayName: 'Prepare analysis on SonarQube'
   inputs:
-    SonarQube: sonarqube
-    scannerMode: CLI
-    configMode: manual
-    cliProjectKey: $(Project.Name)
-    cliProjectName: $(Project.Name)
-    extraProperties: |
-     sonar.language=cs
-     sonar.verbose=true
-     sonar.sourceEncoding=UTF-8
-     sonar.cs.opencover.reportsPaths="TestResults/coverage.opencover.xml"
+    SonarQube: 'sonarqube'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: '$(Project.Name)'
+    cliProjectName: '$(Project.Name)'
+    cliSources: '.'
 - task: SonarQubeAnalyze@4
   displayName: 'Run Code Analysis'
+  
+  
