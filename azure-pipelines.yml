@@ -31,8 +31,8 @@ steps:
     SonarQube: sonarqube
     scannerMode: CLI
     configMode: manual
-    cliProjectKey: '$(Project.Name)'
-    cliProjectName: '$(Project.Name)'
+    cliProjectKey: $(Project.Name)
+    cliProjectName: $(Project.Name)
     extraProperties: |
      sonar.language=cs
      sonar.verbose=true
