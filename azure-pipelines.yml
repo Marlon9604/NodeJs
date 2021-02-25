@@ -31,7 +31,6 @@ steps:
     cliSources: '.'
 
 # Execute unit tests
-- script: mocha test --reporter mocha-junit-reporter
 
 - script: npm test
 - task: PublishTestResults@2
