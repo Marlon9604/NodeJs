@@ -26,7 +26,8 @@ steps:
   inputs:
     SonarQube: sonarqube
     scannerMode: CLI
-    configFile: sonar-project.properties
+    projectName: '$(Project.Name)'
+
 
 - task: SonarQubeAnalyze@4
 
