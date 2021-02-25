@@ -30,10 +30,27 @@ steps:
     cliProjectName: 'Nodejs'
     cliSources: '.'
 
+# Publish unit test results  
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/junit.xml'
+    mergeTestResults: true
+    testRunTitle: 'Jest Unit Tests'
+    failTaskOnFailedTests: true
+  displayName: 'Publish unit test report'
+
+- script: npm run-script coverage-ci
+  workingDirectory: $(System.DefaultWorkingDirectory)/src/$(function_app_name)
+  displayName: "Calculate Code Coverage"
+
+# Publish code coverage results
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/src/$(function_app_name)/coverage/cobertura-coverage.xml
+  displayName: "publish code coverage report"
+  
 - task: SonarQubeAnalyze@4
 
 - task: SonarQubePublish@4
