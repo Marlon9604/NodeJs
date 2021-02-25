@@ -30,9 +30,18 @@ steps:
     cliProjectName: 'Nodejs'
     cliSources: '.'
 
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies'
+    testAssemblyVer2: |
+      **\*test*.dll
+      !**\*TestAdapter.dll
+      !**\obj\**
+    searchFolder: '$(System.DefaultWorkingDirectory)'
 - task: SonarQubeAnalyze@4
 
 - task: SonarQubePublish@4
+
   inputs:
     pollingTimeoutSec: '300'
 - task: PublishTestResults@2
