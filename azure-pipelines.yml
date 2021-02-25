@@ -26,11 +26,17 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
    
 - task: SonarQubePrepare@4
-  displayName: 'Prepare analysis on SonarQube'
+  displayName: 'Prepare apex-web code analysis on SonarQube'
   inputs:
-    SonarQube: sonarqube
-    projectKey: '$(Project.Name)'
-    projectName: '$(Project.Name)'
-
-- task: SonarQubePrepare@4
-  displayName: 'Run Code Analysis'
+    SonarQube: 'sonarqube'
+    scannerMode: CLI
+    configMode: 'file'
+  timeoutInMinutes: 300    
+- task: SonarQubeAnalyze@4
+  displayName: 'Run apex-web code analysis on SonarQube'
+- task: SonarQubePublish@4
+  displayName: 'Publish apex-web analysis results to quality gate on SonarQube'
+  inputs:
+    pollingTimeoutSec: '300'
+  continueOnError: true
+  timeoutInMinutes: 300
