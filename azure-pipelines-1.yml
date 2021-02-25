@@ -34,7 +34,7 @@ stages:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'Docker Hub'
         command: 'Push an image'
-        imageName: '$(ImageName)'
+        imageName: 'marlon9604/prueba:nodejsimages'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
       
       
