@@ -24,19 +24,19 @@ steps:
   inputs:
     testResultsFormat: 'JUnit'
     testResultsFiles: '**/TEST-*.xml'
-   
+
 - task: SonarQubePrepare@4
-  displayName: 'Prepare apex-web code analysis on SonarQube'
+  displayName: 'Prepare analysis on SonarQube'
   inputs:
-    SonarQube: 'sonarqube'
+    SonarQube: sonarqube
     scannerMode: CLI
-    configMode: 'file'
-  timeoutInMinutes: 300    
+    configMode: manual
+    cliProjectKey: '$(Project.Name)'
+    cliProjectName: '$(Project.Name)'
+    extraProperties: |
+     sonar.language=cs
+     sonar.verbose=true
+     sonar.sourceEncoding=UTF-8
+     sonar.cs.opencover.reportsPaths="TestResults/coverage.opencover.xml"
 - task: SonarQubeAnalyze@4
-  displayName: 'Run apex-web code analysis on SonarQube'
-- task: SonarQubePublish@4
-  displayName: 'Publish apex-web analysis results to quality gate on SonarQube'
-  inputs:
-    pollingTimeoutSec: '300'
-  continueOnError: true
-  timeoutInMinutes: 300
+  displayName: 'Run Code Analysis'
