@@ -27,13 +27,12 @@ steps:
 
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: 'sonarqube'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: '$(Project.Name)'
-    cliProjectName: '$(Project.Name)'
-    cliSources: '.'
+    SonarQube: sonarqubeConnectionName
+    scannerMode: CLI
+    configFile: sonar-project.properties
+
 - task: SonarQubeAnalyze@4
-  displayName: 'Run Code Analysis'
+
+- task: SonarQubePublish@4
   
   
