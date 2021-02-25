@@ -20,19 +20,20 @@ steps:
     npm run build
     npm test
   displayName: 'npm install and build'
-- task: PublishTestResults@2
-  inputs:
-    testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
+
 
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: sonarqubeConnectionName
+    SonarQube: sonarqube
     scannerMode: CLI
     configFile: sonar-project.properties
 
 - task: SonarQubeAnalyze@4
 
 - task: SonarQubePublish@4
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
   
   
