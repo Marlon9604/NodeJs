@@ -24,3 +24,8 @@ steps:
   inputs: 
     PathtoPublish: $(Build.ArtifactStagingDirectory) # dist or build files
     ArtifactName: 'www' # output artifact named www
+   
+- task: PublishTestResults@2
+  inputs:
+    testResultsFiles: '**/TEST-RESULTS.xml'
+    testRunTitle: 'Test results for JavaScript using gulp'
