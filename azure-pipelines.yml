@@ -21,17 +21,20 @@ steps:
     npm test
   displayName: 'npm install and build'
 
-
 - task: SonarQubePrepare@4
   inputs:
-    SonarQube: sonarqube
-    scannerMode: CLI
-    projectName: '$(Project.Name)'
-
+    SonarQube: 'sonarqube'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'Nodejs'
+    cliProjectName: 'Nodejs'
+    cliSources: '.'
 
 - task: SonarQubeAnalyze@4
 
 - task: SonarQubePublish@4
+  inputs:
+    pollingTimeoutSec: '300'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
