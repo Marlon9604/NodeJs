@@ -7,7 +7,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
-  ImageName: 'marlon9604/prueba:$(Build.BuildId)'
+  ImageName: 'marlon9604/prueba:nodejsimages'
 
 stages:
 - stage: Build
@@ -26,6 +26,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+
 
 
     - task: Docker@1
