@@ -30,6 +30,33 @@ steps:
     cliProjectName: 'Nodejs'
     cliSources: '.'
 
+# Execute unit tests
+- script: npm run-script test-ci
+  workingDirectory: $(System.DefaultWorkingDirectory)/src/$(function_app_name)
+  displayName: "Execute unit tests"
+  continueOnError: true
+
+- script: npm run-script coverage-ci
+  workingDirectory: $(System.DefaultWorkingDirectory)/src/$(function_app_name)
+  displayName: "Calculate Code Coverage"
+
+# Publish unit test results  
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/junit.xml'
+    mergeTestResults: true
+    testRunTitle: 'Jest Unit Tests'
+    failTaskOnFailedTests: true
+  displayName: 'Publish unit test report'
+
+
+# Publish code coverage results
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: Cobertura
+    summaryFileLocation: $(System.DefaultWorkingDirectory)/src/$(function_app_name)/coverage/cobertura-coverage.xml
+  displayName: "publish code coverage report"
 # Publish unit test results  
 - task: PublishTestResults@2
   inputs:
