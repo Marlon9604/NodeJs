@@ -18,11 +18,10 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-          - task: Docker@1
-            displayName: Build an image
-            inputs:
-            containerRegistry: 'Docker Hub'
-            repository: 'marlon9604/prueba'
-            command: 'buildAndPush'
-            Dockerfile: '**/Dockerfile'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'Docker Hub'
+        repository: 'marlon9604/prueba'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
       
