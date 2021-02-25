@@ -7,6 +7,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  ImageName:  marlon9604/prueba:nodejsimages
 
 stages:
 - stage: Build
@@ -33,7 +34,7 @@ stages:
         containerregistrytype: 'Container Registry'
         dockerRegistryEndpoint: 'Docker Hub'
         command: 'Push an image'
-        imageName: '$(tag)'
+        imageName: '$(ImageName)'
       condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
       
       
