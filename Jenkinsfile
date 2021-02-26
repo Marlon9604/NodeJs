@@ -1,16 +1,9 @@
 pipeline {
-    agent {
-        docker {
-            image 'Dockerfile' 
-            args '-p 3000:3000' 
-        }
-    }
+    agent { docker { image 'marlon9604/prueba:tagname' } }
     stages {
-        stage('Build') { 
+        stage('build') {
             steps {
-                sh 'npm cache verify'
-                sh 'npm cache clean'
-                sh 'npm install' 
+                sh 'npm --version'
             }
         }
     }
