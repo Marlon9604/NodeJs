@@ -1,21 +1,10 @@
 pipeline {
-    agent { 
-        docker 
-        { image 'marlon9604/prueba:nodejsimages' 
-         args '-p 3000:3000'
-        }
-        }
-        environment {
-        CI = 'true' 
-    }
+    agent { docker { image 'marlon9604/prueba:nodejsimages' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh 'npm install'
+                sh 'npm 14'
             }
         }
-        stage('Test') { 
-            steps {
-                sh './jenkins/scripts/test.sh' 
-            }
+    }
 }
