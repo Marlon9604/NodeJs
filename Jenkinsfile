@@ -27,7 +27,6 @@ pipeline {
     {
         steps {
             sh "docker run -p 8090:8094 marlon9604/prueba:Version2.0"
-            sh "docker ps"
             sh "docker stop marlon9604/prueba:Version2.0"
                }
           }
