@@ -26,6 +26,7 @@ pipeline {
     stage("run imagen") {
                    steps {
             sh "docker run -p 8090:8090 marlon9604/prueba:Version2.0"
+            sh "docker ps"
                }
           }
   }
