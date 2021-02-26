@@ -19,7 +19,6 @@ pipeline {
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push("Version2.0")
-             dockerImage.push('Version2.0')
           }
         }
       }
