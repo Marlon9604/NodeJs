@@ -23,7 +23,7 @@ pipeline {
         }
       }
     }
-    stage("deploy") {
+    stage("run imagen") {
                    steps {
             sh "docker run -p 8090:8090 ${imagename}:Version2.0"
                }docker
