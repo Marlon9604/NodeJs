@@ -1,0 +1,28 @@
+name : DockerImagen
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  tag: '$(Build.BuildId)'
+  ImageName: 'marlon9604/prueba:nodejsimages'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: Docker@2
+      displayName: Build AND PUSH
+      inputs:
+        containerRegistry: 'Docker Hub'
+        repository: 'marlon9604/prueba'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
+      
