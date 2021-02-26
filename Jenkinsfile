@@ -1,4 +1,3 @@
-
 pipeline {
   environment {
     imagename = "marlon9604/prueba"
@@ -16,10 +15,8 @@ pipeline {
     stage('Deploy Image') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
             dockerImage.push("$BUILD_NUMBER")
-             dockerImage.push('NodeV3')
-          }
+             dockerImage.push('v3.0')          
         }
       }
     }
