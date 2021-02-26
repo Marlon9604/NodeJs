@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'marlon9604/prueba:tagname' } }
+    agent { docker { image 'marlon9604/prueba:nodejsimages' } }
     stages {
         stage('build') {
             steps {
