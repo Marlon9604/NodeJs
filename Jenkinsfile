@@ -26,8 +26,9 @@ pipeline {
      stage("run imagen") 
      {
          steps {
-                 echo "Run docker image"
+                script {
                dockerImage.run("Version2.0")
+                }
          }
            }
   }
