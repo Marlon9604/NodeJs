@@ -23,12 +23,14 @@ pipeline {
         }
       }
     }
-    // stage("run imagen") 
-    // {
-    //     steps {
-    //         sh "docker run -p 8091:8094 marlon9604/prueba:Version2.0"
-    //         sh "docker stop marlon9604/prueba:Version2.0"
-    //            }
-    //       }
+     stage("run imagen") 
+     {
+         steps {
+                 echo "Run docker image"
+                script {
+                    pipelineContext.dockerContainer = pipelineContext.dockerImage.run()
+                }
+         }
+           }
   }
 }
