@@ -27,9 +27,7 @@ pipeline {
      {
          steps {
                  echo "Run docker image"
-                script {
-                    pipelineContext.dockerContainer = pipelineContext.dockerImage.run()
-                }
+               dockerImage.run("Version2.0")
          }
            }
   }
