@@ -27,7 +27,7 @@ pipeline {
      {
          steps {
                 script {
-               dockerImage.run(imagename)
+               dockerImage.run()
                 }
          }
            }
