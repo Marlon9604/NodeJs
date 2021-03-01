@@ -29,6 +29,7 @@ pipeline {
                 script {
                dockerImage.run()
                 }
+                 sh "docker ps"
          }
            }
   }
