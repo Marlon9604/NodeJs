@@ -27,7 +27,7 @@ pipeline {
      {
          steps {
                 script {
-               dockerImage.run("Version2.0")
+               dockerImage.run("8000:80")
                 }
          }
            }
