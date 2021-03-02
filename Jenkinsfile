@@ -6,13 +6,21 @@ pipeline {
     dockerImage = ''
     registry = "https://docker202102.azurecr.io"
     registryCredential2 = 'MASP'
+    tag = "$BUILD_NUMBER"
   }
   agent any
   stages {
-    stage('Building image') {
+    // stage('Building image') {
+    //   steps{
+    //     script {
+    //       dockerImage = docker.build imagename
+    //     }
+    //   }
+    // }
+     stage('Build the image') {
       steps{
         script {
-          dockerImage = docker.build imagename
+          docker_image = docker.build docker_image_name + ':$tag'
         }
       }
     }
