@@ -40,7 +40,7 @@ pipeline {
                     publishType: "docker",
                     filePath: " **/Dockerfile.",
                     resourceGroup: "PruebaCI",
-                    sourceDirectory: "/app"
+                    sourceDirectory: "/app",
                     dockerImageName: 'marlon9604/prueba', 
                     dockerImageTag: '1',
             }
