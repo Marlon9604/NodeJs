@@ -42,7 +42,7 @@ pipeline {
                     resourceGroup: "PruebaCI",
                     sourceDirectory: "/app",
                     dockerImageName: 'marlon9604/prueba', 
-                    dockerImageTag: '1',
+                    dockerImageTag: '1'
             }
         }
      }
