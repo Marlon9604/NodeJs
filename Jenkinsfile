@@ -43,6 +43,15 @@ pipeline {
                     sourceDirectory: "/app"
             }
         }
+
+        // Build and Deploy to ACR 'stage'... 
+		stage('Build and Push to Azure Container Registry') {
+			app = docker.build('Version2.0')
+			docker.withRegistry('docker202102.azurecr.io', 'PruebaCI') {
+				app.push("${env.BUILD_NUMBER}")
+				app.push('latest')
+			}
+		}
      }
   }
 
