@@ -20,7 +20,7 @@ pipeline {
      stage('Build the image') {
       steps{
         script {
-          docker_image = docker.build docker_image_name + ':$tag'
+          dockerImage = docker.build 
         }
       }
     }
@@ -47,7 +47,7 @@ pipeline {
         stage('Push the image') {
       steps{
         script {
-          docker.withRegistry(registry, registryCredential2) {
+          docker.withRegistry('', registryCredential2) {
              docker_image.push()
            }
         }
