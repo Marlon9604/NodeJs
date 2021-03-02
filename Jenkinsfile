@@ -36,7 +36,7 @@ pipeline {
         stage('Build and Push to Azure Container Registry')
          { 
            steps {
-             app = docker.build('marlon9604/prueba"') 
+             app = docker.build('marlon9604/prueba') 
          docker.withRegistry('https://docker202102.azurecr.io', 'acr-credentials') 
          { app.push("${env.BUILD_NUMBER}") app.push('latest') }
           }
