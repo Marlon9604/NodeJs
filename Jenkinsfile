@@ -43,7 +43,7 @@ pipeline {
                     sourceDirectory: '/app',
                     dockerImageName: 'marlon9604/prueba', 
                     skipDockerBuild: true,
-                    dockerImageTag: "$tag",
+                    dockerImageTag: '1',
                     dockerRegistryEndpoint: [credentialsId: 'MASP', url: 'https://docker202102.azurecr.io']
                 }
         }
