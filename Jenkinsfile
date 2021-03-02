@@ -36,6 +36,7 @@ pipeline {
      stage("Publish to Azure") {
             steps {
                 azureWebAppPublish appName: "Docker202102",
+                    azureCredentialsId: 'acr-credentials',
                     publishType: 'docker',
                     filePath: ' **/Dockerfile',
                     resourceGroup: 'PruebaCI',
