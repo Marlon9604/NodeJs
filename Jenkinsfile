@@ -5,7 +5,7 @@ pipeline {
     registryCredential = 'DockerHubMarlon'
     dockerImage = ''
     registry = "https://docker202102.azurecr.io"
-    registryCredential2 = 'acr_credentials'
+    registryCredential2 = 'MASP'
   }
   agent any
   stages {
