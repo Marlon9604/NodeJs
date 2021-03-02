@@ -41,12 +41,3 @@ pipeline {
      }
   }
 }
-
-
-steps:
-- task: AzureWebAppContainer@1
-  displayName: 'Azure Web App on Container Deploy: Docker202102'
-  inputs:
-    azureSubscription: 'ASC resource'
-    appName: Docker202102
-    containers: 'docker202102.azurecr.io/Docker202102:$(Build.BuildId)'
