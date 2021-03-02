@@ -33,14 +33,20 @@ pipeline {
     //              sh "docker ps"
     //      }
     //  }
-        stage('Build and Push to Azure Container Registry')
-         { 
-           steps {
-             app = docker.build('marlon9604/prueba') 
-         docker.withRegistry('https://docker202102.azurecr.io', 'acr-credentials') 
-         { app.push("${env.BUILD_NUMBER}") app.push('latest') }
-          }
-         }
+     stage("Publish to Azure") {
+            steps {
+                azureWebAppPublish appName: "Docker202102",
+                    azureCredentialsId: 'ec606faf-c2d5-4a2f-9d61-43d10041b898',
+                    publishType: 'docker',
+                    filePath: ' **/Dockerfile',
+                    resourceGroup: 'PruebaCI',
+                    sourceDirectory: '/app',
+                    dockerImageName: 'marlon9604/prueba', 
+                    skipDockerBuild: true,
+                    dockerImageTag: '1',
+                    dockerRegistryEndpoint: [credentialsId: 'acr-credentials', url: 'https://docker202102.azurecr.io']
+                }
+     }
      }
   }
 
