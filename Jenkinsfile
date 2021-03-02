@@ -44,7 +44,7 @@ pipeline {
                     dockerImageName: 'marlon9604/prueba', 
                     skipDockerBuild: true,
                     dockerImageTag: '1',
-                    dockerRegistryEndpoint: [credentialsId: 'MASP', url: 'https://docker202102.azurecr.io']
+                    dockerRegistryEndpoint: [credentialsId: 'DockerHubMarlon', url: 'https://docker202102.azurecr.io']
                 }
         }
      }
