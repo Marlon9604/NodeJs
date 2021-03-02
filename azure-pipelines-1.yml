@@ -25,4 +25,10 @@ stages:
         repository: 'marlon9604/prueba'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'DockerASC'
+        repository: 'Azure Container Registry'
+        command: 'push'
+      displayName: 'Docker image push'
       
