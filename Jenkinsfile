@@ -50,17 +50,15 @@ pipeline {
     //                 dockerRegistryEndpoint: [credentialsId: 'acr-credentials', url: 'https://docker202102.azurecr.io']
     //             }
     //  }
-
-      stage('Push Images to ACR') {
-            steps {
-                script {
-                    dir('custom-images') {
-                        azureCLI commands: [[exportVariablesString: '', script: 'az acr login --name ' + REGISTRY]], principalCredentialId: PRINCIPAL_SERVICE_CREDENTIAL_ID
-                        bat "docker push marlon9604/prueba:123"
-                    }
-                }
-            }
-        }
+ stage("Pushing to Azure Storage") {
+            withCredentials([azureServicePrincipal(credentialsId: 'MASP',
+                                    subscriptionIdVariable: 'SUBS_ID',
+                                    clientIdVariable: 'CLIENT_ID',
+                                    clientSecretVariable: 'CLIENT_SECRET',
+                                    tenantIdVariable: 'TENANT_ID')]) {
+        sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
+    }
+}
      }
   }
 
