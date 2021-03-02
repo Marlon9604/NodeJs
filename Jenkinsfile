@@ -35,21 +35,17 @@ pipeline {
     //  }
      stage("Publish to Azure") {
             steps {
-                azureWebAppPublish appName: "Docker202102",
+                azureWebAppPublish 
+                    appName: "Docker202102",
                     azureCredentialsId: "ec606faf-c2d5-4a2f-9d61-43d10041b898",
-                    publishType: "file",
-                    filePath: "**/*.*",
+                    publishType: "docker",
+                    filePath: " **/Dockerfile.",
                     resourceGroup: "PruebaCI",
                     sourceDirectory: "/app"
+                    dockerImageName: 'marlon9604/prueba', 
+                    dockerImageTag: '1',
             }
         }
-
-        // Build and Deploy to ACR 'stage'... 
-		stage('Build and Push to Azure Container Registry') {
-			docker.withRegistry('docker202102.azurecr.io', 'PruebaCI') {
-			  dockerImage.push("Version2.0")
-			}
-		}
      }
   }
 
