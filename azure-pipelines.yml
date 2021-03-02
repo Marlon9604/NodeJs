@@ -12,12 +12,6 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-    npm test
-  displayName: 'npm install and build'
-
 - task: SonarQubePrepare@4
   inputs:
     SonarQube: 'sonarqube'
@@ -26,6 +20,14 @@ steps:
     cliProjectKey: 'Nodejs'
     cliProjectName: 'Nodejs'
     cliSources: '.'
+    
+- script: |
+    npm install
+    npm run build
+    npm test
+  displayName: 'npm install and build'
+
+
 
 # Execute unit tests
 - task: PublishTestResults@2
