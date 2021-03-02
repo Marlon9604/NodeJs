@@ -23,14 +23,15 @@ pipeline {
         }
       }
     }
-     stage("run imagen") 
-     {
-         steps {
-                script {
-               dockerImage.run()
-                }
-                 sh "docker ps"
-         }
-           }
+    
+    //  stage("run imagen") 
+    //  {
+    //      steps {
+    //             script {
+    //            dockerImage.run()
+    //             }
+    //              sh "docker ps"
+    //      }
+    //  }
   }
 }
