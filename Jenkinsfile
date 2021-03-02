@@ -33,11 +33,16 @@ pipeline {
     //              sh "docker ps"
     //      }
     //  }
-      stage('Build the Image and Push to Azure Container Registry') 
-      {                
-      withDockerRegistry([credentialsId: 'MASP', url: 'https://docker202102.azurewebsites.net']) {                
-       dockerImage.push("Version2.0")               
-      }        
+     stage("Publish to Azure") {
+            steps {
+                azureWebAppPublish appName: "Docker202102",
+                    azureCredentialsId: "ec606faf-c2d5-4a2f-9d61-43d10041b898",
+                    publishType: "file",
+                    filePath: "**/*.*",
+                    resourceGroup: "PruebaCI",
+                    sourceDirectory: "/app"
+            }
+        }
      }
   }
-}
+
