@@ -58,9 +58,8 @@ pipeline {
         // sh 'az group list'
         sh 'az acr login --name docker202102'
         // sh 'docker login -u=marlon9604 --password-stdin=Sebastian_96*'
-        sh 'az acr task create --registry $ACR_NAME 
-          --name task911backend --image marlon9604/prueba:$NUMBER 
-          --context $REPO_URL --file $DOCKER_FILE_LOCATION  --git-access-token $GIT_PAT --branch master'
+        sh 'az acr task create --registry $ACR_NAME --name tareadocker --image marlon9604/prueba:$NUMBER --context $REPO_URL --file $DOCKER_FILE_LOCATION  --git-access-token $GIT_PAT --branch master'
+
  }
  
                                     
