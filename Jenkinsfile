@@ -51,9 +51,8 @@ pipeline {
         sh 'az account set -s $SUBS_ID'
         // sh 'az group list'
         sh 'az acr login --name docker202102'
-        sh 'docker login docker202102.azurecr.io'
         // sh 'docker login -u=marlon9604 --password-stdin=Sebastian_96*'
-        sh 'az acr build --image marlon9604/prueba:nodejsimages --registry  --file Dockerfile . '
+        sh 'az acr build --image $dockerImage --registry  --file Dockerfile . '
  }
  
                                     
