@@ -22,7 +22,7 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("Version2.0")
+            dockerImage.push()
           }
         }
       }
@@ -52,7 +52,7 @@ pipeline {
         // sh 'az group list'
         sh 'az acr login --name docker202102'
         // sh 'docker login -u=marlon9604 --password-stdin=Sebastian_96*'
-        sh 'az acr build --image ${dockerImage} --registry  --file Dockerfile . '
+        sh 'az acr build --image ' ${dockerImage} '--registry  --file Dockerfile . '
  }
  
                                     
