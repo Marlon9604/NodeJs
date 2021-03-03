@@ -48,7 +48,7 @@ pipeline {
                                      clientSecretVariable: 'CLIENT_SECRET',
                                      tenantIdVariable: 'TENANT_ID')]) {
         sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
-        sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
+        sh 'az account set -s $SUBS_ID'
         sh 'az acr login --name $CONTAINER_REGISTRY --resource-group $RESOURCE_GROUP'
         sh 'az acr build --image $REPO/$IMAGE_NAME:$TAG --registry $CONTAINER_REGISTRY --file Dockerfile . '
  }
