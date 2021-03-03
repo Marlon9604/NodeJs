@@ -6,21 +6,13 @@ pipeline {
     dockerImage = ''
     registry = "https://docker202102.azurecr.io"
     registryCredential2 = 'MASP'
-    tag = "$BUILD_NUMBER"
   }
   agent any
   stages {
-    // stage('Building image') {
-    //   steps{
-    //     script {
-    //       dockerImage = docker.build imagename
-    //     }
-    //   }
-    // }
-     stage('Build the image') {
+    stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build 
+          dockerImage = docker.build imagename
         }
       }
     }
@@ -44,31 +36,24 @@ pipeline {
     //      }
     //  }
     
-        stage('Push the image') {
-      steps{
-        script {
-          docker.withRegistry('', registryCredential2) {
-             docker_image.push()
-           }
-        }
-      }
-    }
 
-//  stage("Pushing to Azure Storage") {
-//     steps{
-//         script {
-//             withCredentials([azureServicePrincipal(credentialsId: 'MASP',
-//                                     subscriptionIdVariable: 'SUBS_ID',
-//                                     clientIdVariable: 'CLIENT_ID',
-//                                     clientSecretVariable: 'CLIENT_SECRET',
-//                                     tenantIdVariable: 'TENANT_ID')]) {
-//         sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
-   
-// }
+  stage("Pushing to Azure Storage") {
+     steps{
+         script {
+             withCredentials([azureServicePrincipal(credentialsId: 'MASP',
+                                     subscriptionIdVariable: 'SUBS_ID',
+                                     clientIdVariable: 'CLIENT_ID',
+                                     clientSecretVariable: 'CLIENT_SECRET',
+                                     tenantIdVariable: 'TENANT_ID')]) {
+        sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
+        sh 'az account set -s $AZURE_SUBSCRIPTION_ID'
+        sh 'az acr login --name $CONTAINER_REGISTRY --resource-group $RESOURCE_GROUP'
+        sh 'az acr build --image $REPO/$IMAGE_NAME:$TAG --registry $CONTAINER_REGISTRY --file Dockerfile . '
+ }
                                     
-//         }
-//     }
-// }
+         }
+     }
+ }
      }
   }
 
