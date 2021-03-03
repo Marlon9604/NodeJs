@@ -9,7 +9,7 @@ pipeline {
     ACR_NAME="docker202102"
     GIT_USER="marlon9604"
     GIT_PAT="11e126b07753a9e0a0cf846e349be3eea61d2f05"
-    REPO_URL="https://github.com/Marlon9604/NodeJs.git"
+    REPO_URL="https://github.com/Marlon9604/NodeJs.git#master"
     DOCKER_FILE_LOCATION="Dockerfile"
     NUMBER = ":$BUILD_NUMBER" 
   }
