@@ -7,7 +7,7 @@ pipeline {
     registry = "https://docker202102.azurecr.io"
     registryCredential2 = 'MASP'
   }
-  agent any
+  agent {​​​​​ label 'master' }​​​​​
   stages {
     stage('Building image') {
       steps{
