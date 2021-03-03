@@ -49,6 +49,7 @@ pipeline {
                                      tenantIdVariable: 'TENANT_ID')]) {
         sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
         sh 'az account set -s $SUBS_ID'
+        sh 'az group create --name myResourceGroup --location westeurope'
         sh 'az acr login --name Docker202102 --resource group PruebaCI'
         sh 'az acr build --image $REPO/$IMAGE_NAME:$TAG --registry $CONTAINER_REGISTRY --file Dockerfile . '
  }
