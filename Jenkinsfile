@@ -11,7 +11,7 @@ pipeline {
     GIT_PAT="11e126b07753a9e0a0cf846e349be3eea61d2f05"
     REPO_URL="https://github.com/Marlon9604/NodeJs.git"
     DOCKER_FILE_LOCATION="Dockerfile"
-    NUMBER = ":$BUILD_NUMBER" 
+    NUMBER = "$BUILD_NUMBER" 
   }
   agent {
     label 'master'
@@ -20,7 +20,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          dockerImage = docker.build imagename + ":$BUILD_NUMBER" 
+          dockerImage = docker.build imagename + NUMBER
         }
       }
     }
