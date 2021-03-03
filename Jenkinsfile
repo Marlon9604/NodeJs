@@ -11,7 +11,7 @@ pipeline {
     GIT_PAT="11e126b07753a9e0a0cf846e349be3eea61d2f05"
     REPO_URL="https://github.com/Marlon9604/NodeJs.git"
     DOCKER_FILE_LOCATION="Dockerfile"
-    NUMBER = "$BUILD_NUMBER" 
+    NUMBER = ":$BUILD_NUMBER" 
   }
   agent {
     label 'master'
@@ -58,7 +58,7 @@ pipeline {
         // sh 'az group list'
         sh 'az acr login --name docker202102'
         // sh 'docker login -u=marlon9604 --password-stdin=Sebastian_96*'
-        sh 'az acr task create --registry $ACR_NAME --name tareadocker --image marlon9604/prueba:$NUMBER --context $REPO_URL --file $DOCKER_FILE_LOCATION  --git-access-token $GIT_PAT --branch master'
+        sh 'az acr task create --registry $ACR_NAME --name tareadocker --image marlon9604/prueba$NUMBER --context $REPO_URL --file $DOCKER_FILE_LOCATION  --git-access-token $GIT_PAT '
 
  }
  
