@@ -6,6 +6,12 @@ pipeline {
     dockerImage = ''
     registry = "https://docker202102.azurecr.io"
     registryCredential2 = 'MASP'
+    ACR_NAME="docker202102"
+    GIT_USER="marlon9604"
+    GIT_PAT="<YOUR_GITHUN_PATH>"
+    REPO_URL="https://github.com/Marlon9604/NodeJs.git"
+    DOCKER_FILE_LOCATION="Dockerfile"
+    NUMBER = ":$BUILD_NUMBER" 
   }
   agent {
     label 'master'
@@ -52,7 +58,10 @@ pipeline {
         // sh 'az group list'
         sh 'az acr login --name docker202102'
         // sh 'docker login -u=marlon9604 --password-stdin=Sebastian_96*'
-        sh 'az acr build --image ' ${dockerImage} '--registry  --file Dockerfile . '
+        sh 'az acr task create --registry $ACR_NAME \
+          --name task911backend --image marlon9604/prueba:$NUMBER \
+          --context $REPO_URL --file $DOCKER_FILE_LOCATION --git-access-token $GIT_PAT \
+          --branch master'
  }
  
                                     
