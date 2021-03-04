@@ -61,7 +61,7 @@ pipeline {
             sh 'az acr task create --registry $ACR_NAME \
               --name tareadocker --image docker202102$NUMBER \
               --context $REPO_URL --file $DOCKER_FILE_LOCATION  \
-              --git-access-token $GIT_PAT '
+              --git-access-token c3de2c67559663f25b9887e73c8dcf6ea19797b7 '
             sh 'az acr task run --registry $ACR_NAME  --name tareadocker'
                                      }
         }
