@@ -8,7 +8,11 @@ pipeline {
     registryCredential2 = 'MASP'
     ACR_NAME = 'docker202102'
     GIT_USER = 'marlon9604'
+<<<<<<< HEAD
     GIT_PAT = 'eed53abe87df57db50b2b4e7cb0146ca50295bfa'
+=======
+    GIT_PAT = '61e04196a67093d980baa7fe0bdc32ff13a0fd37'
+>>>>>>> 9e8168239084204fec855d6581c518ca31cd7d2f
     REPO_URL = 'https://github.com/Marlon9604/NodeJs.git#master'
     DOCKER_FILE_LOCATION = 'Dockerfile'
     NUMBER = ":$BUILD_NUMBER"
