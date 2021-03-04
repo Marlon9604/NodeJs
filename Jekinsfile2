@@ -4,12 +4,6 @@ pipeline {
     imagename = 'marlon9604/prueba'
     registryCredential = 'DockerHubMarlon'
     dockerImage = ''
-    registry = 'https://docker202102.azurecr.io'
-    registryCredential2 = 'MASP'
-    ACR_NAME = 'docker202102'
-    GIT_USER = 'marlon9604'
-    REPO_URL = 'https://github.com/Marlon9604/NodeJs.git#master'
-    DOCKER_FILE_LOCATION = 'Dockerfile'
     NUMBER = ":$BUILD_NUMBER"
   }
   agent {
@@ -31,20 +25,6 @@ pipeline {
           }
         }
       }
-    }
-
-     stage("run imagen")
-     {
-         steps {
-                script {
-               dockerImage.run()
-                }
-                 sh "docker ps"
-         }
-     }
-             // sh 'az group list'
-            // sh 'az acr login --name docker202102'
-            // sh 'docker login -u=marlon9604 --password-stdin=Sebastian_96*'
     }
   }
 }
