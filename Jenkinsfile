@@ -8,7 +8,7 @@ pipeline {
     registryCredential2 = 'MASP'
     ACR_NAME = 'docker202102'
     GIT_USER = 'marlon9604'
-    GIT_PAT = '76f62b37d100ec24c17238cfa0ddf58aaca7d567'
+    GIT_PAT = '29e9863bf6d231635c149ded68f666988891d163'
     REPO_URL = 'https://github.com/Marlon9604/NodeJs.git#master'
     DOCKER_FILE_LOCATION = 'Dockerfile'
     NUMBER = ":$BUILD_NUMBER"
@@ -64,7 +64,6 @@ pipeline {
               --git-access-token $GIT_PAT '
             sh 'az acr task run --registry $ACR_NAME  --name tareadocker'
                                      }
-
         }
       }
     }
