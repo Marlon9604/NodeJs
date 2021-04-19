@@ -6,8 +6,7 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
-  ImageName: 'marlon9604/prueba:nodejsimages'
+   ImageName: 'marlon9604/prueba:$(Build.BuildId)'
 
 stages:
 - stage: Build
@@ -25,18 +24,60 @@ stages:
     - script: |
         npm install
       displayName: 'npm install and build'
-      
-    - task: Docker@2
-      displayName: Build AND PUSH
-      inputs:
-        containerRegistry: 'Docker Hub'
-        repository: 'marlon9604/prueba'
-        command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
 
-    - task: Docker@2
+    - script: |
+        sudo apt-get install wget apt-transport-https gnupg lsb-release
+        wget -qO - https://aquasecurity.github.io/trivy-repo/deb/public.key | sudo apt-key add -
+        echo deb https://aquasecurity.github.io/trivy-repo/deb $(lsb_release -sc) main | sudo tee -a /etc/apt/sources.list.d/trivy.list
+        sudo apt-get update
+        sudo apt-get install trivy
+        trivy --version
+      displayName: 'Download and install Trivy'
+    
+    - task: Docker@1
+      displayName: 'Build the Docker image'
       inputs:
-            containerRegistry: 'DockerASC'
-            repository: 'Docker202102'
-            command: 'buildAndPush'
-            Dockerfile: '**/Dockerfile'
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'Docker Hub'
+        command: 'Build an image'
+        dockerFile: '**/Dockerfile'
+        imageName: '$(ImageName)'
+        includeLatestTag: true
+        useDefaultContext: false
+        buildContext: '.'
+
+    - task: CmdLine@2
+      displayName: "Run trivy scan"
+      inputs:
+        script: |
+            trivy image --exit-code 0 --severity LOW,MEDIUM -f json -o results.json  ubuntu:latest
+            trivy image --exit-code 1 --severity HIGH,CRITICAL -f json -o results.json  ubuntu:latest  
+            
+
+    # - task: CmdLine@2
+    #   displayName: "Run trivy scan"
+    #   inputs:
+    #      script: |
+    #        trivy image --exit-code 0 --severity LOW,MEDIUM $(ImageName)
+    #        trivy image --exit-code 1 --severity HIGH, CRITICAL $(ImageName)  
+    
+    - task: Docker@1
+      displayName: 'Push the Docker image to Dockerhub'
+      inputs:
+        containerregistrytype: 'Container Registry'
+        dockerRegistryEndpoint: 'Docker Hub'
+        command: 'Push an image'
+        imageName: $(ImageName)
+    
+    
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: '$(ImageName)'
+        publishLocation: 'Container'
+    # - task: Docker@2
+    #   inputs:
+    #         containerRegistry: 'DockerASC'
+    #         repository: 'Docker202102'
+    #         command: 'buildAndPush'
+    #         Dockerfile: '**/Dockerfile'
